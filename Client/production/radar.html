@@ -51,7 +51,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                    <!-- <li><a href="dashboard1.html">Dashboard</a></li>-->
+                        <!-- <li><a href="dashboard1.html">Dashboard</a></li>-->
                       <li><a href="main1.html">Active and non-active users</a></li>
                       <li><a href="table.html">Weekly report</a></li>
                     <li><a href="category.html">Category-wise discussion</a></li>
@@ -89,9 +89,10 @@
         <div class="top_nav">
           <div class="nav_menu">
             <nav>
-            <ul class="nav navbar-nav navbar-right">
+              <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                   <!-- <img src="images/img.jpg" alt="">John Doe-->
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -116,102 +117,28 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-          <div class="row">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">   
+              </div>
               <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="x_panel fixed_height_320">
+                <div class="x_panel">
                   <div class="x_title">
-                    <h2>Weekly Summary</h2>
-                    
+                    <h2>Largest Interaction Group</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <div class="widget_summary">
-                      <div class="w_left w_25">
-                        <span>Threads</span>
-                      </div>
-                      <div class="w_center w_55">
-                        <div class="progress">
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-                            <span class="sr-only">60% Complete</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w_right w_20">
-                        <span>123k</span>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-
-                    <div class="widget_summary">
-                      <div class="w_left w_25">
-                        <span>posts</span>
-                      </div>
-                      <div class="w_center w_55">
-                        <div class="progress">
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-                            <span class="sr-only">60% Complete</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w_right w_20">
-                        <span>53k</span>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="widget_summary">
-                      <div class="w_left w_25">
-                          <span>Comments</span>
-                      </div>
-                      <div class="w_center w_55">
-                        <div class="progress">
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-                            <span class="sr-only">60% Complete</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w_right w_20">
-                        <span>23k</span>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                    <div class="widget_summary">
-                      <div class="w_left w_25">
-                        <span>Replies</span>
-                      </div>
-                      <div class="w_center w_55">
-                        <div class="progress">
-                          <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                            <span class="sr-only">60% Complete</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w_right w_20">
-                        <span>3k</span>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-                   
-                      <div class="clearfix"></div>
-                    </div>
-
+                    <canvas id="canvasRadar"></canvas>
                   </div>
                 </div>
               </div>
-                <div class="clearfix"></div>
-              </div>
-            </div>
-
-          </div>
-          <br />
-
-              </div>
-            </div>
-          </div>
-        </div>
         <!-- /page content -->
 
         <!-- footer content -->
-    
+        
+        <!-- /footer content -->
+      </div>
+    </div>
 
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
@@ -223,36 +150,9 @@
     <script src="../vendors/nprogress/nprogress.js"></script>
     <!-- Chart.js -->
     <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
-    <!-- gauge.js -->
-    <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
-    <!-- Skycons -->
-    <script src="../vendors/skycons/skycons.js"></script>
-    <!-- Flot -->
-    <script src="../vendors/Flot/jquery.flot.js"></script>
-    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
-    <script src="../vendors/Flot/jquery.flot.time.js"></script>
-    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="../vendors/DateJS/build/date.js"></script>
-    <!-- JQVMap -->
-    <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="../vendors/moment/min/moment.min.js"></script>
-    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-	
+
   </body>
 </html>

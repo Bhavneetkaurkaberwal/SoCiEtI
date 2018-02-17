@@ -27,7 +27,7 @@
         		   </SCRIPT>");
 		}
 	}
-	$password = md5($password);
+	$password = base64_encode($password);
 	$sql = "INSERT INTO users (user_id, password, Role)
 	VALUES ('$user_id','$password','$role')";
 	if (!mysqli_query($conn,$sql))
