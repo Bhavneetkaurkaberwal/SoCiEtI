@@ -1,4 +1,3 @@
-// Creates database
 <?php
 $hostname = "localhost";
 $user = "root";

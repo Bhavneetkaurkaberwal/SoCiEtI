@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.link {
+  stroke: #000;
+}
+
+.node {
+  stroke: #00f;
+}
+
+</style>
+<style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
+<body>
+<script src="d3.v3.min.js"></script>
+<div class="tab">
+  <button class="tablinks" onclick="myFunction('week1')" id="week1">Week1</button>
+  <button class="tablinks" onclick="myFunction('week2')" id="week2"">Week2</button>
+  <button class="tablinks" onclick="myFunction('week3')" id="week3">Week3</button>
+  <button class="tablinks" onclick="myFunction('week4')" id="week4">Week4</button>
+  <button class="tablinks" onclick="myFunction('week5')" id="week5">Week5</button>
+  <button class="tablinks" onclick="myFunction('week6')" id="week6">Week6</button>
+  <button class="tablinks" onclick="myFunction('week7')" id="week7">Week7</button>
+  <button class="tablinks" onclick="myFunction('week8')" id="week8">Week8</button>
+  <button class="tablinks" onclick="myFunction('week9')" id="week9">Week9</button>
+  <button class="tablinks" onclick="myFunction('week10')" id="week10">Week10</button>
+  <button class="tablinks" onclick="myFunction('week11')" id="week11">Week11</button>
+  <button class="tablinks" onclick="myFunction('week13')" id="week13">Week13</button>
+  <button class="tablinks" onclick="myFunction('week14')" id="week14">Week14</button>
+  <button class="tablinks" onclick="myFunction('graph')" id="all">Allweeks</button>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous">
+</script>
+
+
+<script>
+function myFunction(name) {
+var width = 1960,
+    height = 1500;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width) 
+    .attr("height", height);
+
+var force = d3.layout.force()
+    .size([width, height]);
+    
+
+                      d3.csv(name+".csv", function(error, links) {
+                     if (error) throw error;  
+    
+
+ 
+
+  var nodesByName = {};
+
+  // Create nodes for each unique source and target.
+  links.forEach(function(link) {
+    link.source = nodeByName(link.source);
+    link.target = nodeByName(link.target);
+  });
+
+  // Extract the array of nodes from the map by name.
+  var nodes = d3.values(nodesByName);
+
+  // Create the link lines.
+  var link = svg.selectAll(".link")
+      .data(links)
+    .enter().append("line")
+      .attr("class", "link");
+
+  // Create the node circles.
+  var node = svg.selectAll(".node")
+      .data(nodes)
+    .enter().append("circle")
+      .attr("class", "node")
+      .attr("r", 4.5)
+      .call(force.drag);
+
+  // Start the force layout.
+  force
+      .nodes(nodes)
+      .links(links)
+      .on("tick", tick)
+      .start();
+
+  function tick() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  }
+
+  function nodeByName(name) {
+    return nodesByName[name] || (nodesByName[name] = {name: name});
+  }
+});
+
+}
+</script>
+
+

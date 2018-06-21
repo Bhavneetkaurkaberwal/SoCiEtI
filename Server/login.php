@@ -36,7 +36,7 @@
 		  
 		echo ("<SCRIPT LANGUAGE='JavaScript'>
            	     window.alert('Username or Password Invalid. Please try again')
-                     window.location.href='http://localhost/project/production/login.html'
+                     window.location.href='http://localhost/project/prod/login.html'
         	     </SCRIPT>");
 
 	  }
@@ -58,7 +58,7 @@
 	//$_SESSION["Role"] = $role;
 
 	echo ("<SCRIPT LANGUAGE='JavaScript'>
-             window.location.href='http://localhost/project/production/dashboard1.php'
+             window.location.href='http://localhost/project/prod/dashboard1.php'
              </SCRIPT>"); 
           
         header("Location:dashboard1.php?user_id=".$user_id);
@@ -77,7 +77,7 @@
 	//$_SESSION["Role"] = $role;
           
         echo ("<SCRIPT LANGUAGE='JavaScript'>
-             window.location.href='http://localhost/project/production/dashboard2.html'
+             window.location.href='http://localhost/project/prod/dashboard2.php'
              </SCRIPT>"); 
      }    
       

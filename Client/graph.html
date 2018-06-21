@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+.link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+.node {
+  stroke: #000;
+  stroke-width: .5px;
+}
+.node.group0{
+  fill: #7baec4;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+.node.group1{
+  fill: #a83f12;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+text {
+  font-size: 14px;
+  pointer-events: none;
+  color: green;
+  font-family: cursive;
+  
+}
+.link.type1{
+  stroke: #21d366;
+  stroke-opacity: 1; 
+  stroke-width: 4;
+}
+
+.link.type2{
+  stroke: #c47f86;
+  stroke-opacity: 1; 
+  stroke-width: 4;
+}
+
+.link.type3{
+  stroke: blue;
+  stroke-opacity: .5; 
+  stroke-width: 4;
+}
+
+.node text {
+  background: #eee;                                               /* NEW */
+  box-shadow: 0 0 5px #999999;                                    /* NEW */
+        color: #333;                                                    /* NEW */
+        display: none;                                                  /* NEW */
+        font-size: 12px;                                                /* NEW */
+        left: 300x;                                                    /* NEW */
+        padding: 10px;                                                  /* NEW */
+        position: absolute;                                             /* NEW */
+        text-align: center;                                             /* NEW */
+        top: 95px;                                                      /* NEW */
+        width: 80px;                                                    /* NEW */
+        z-index: 10; 
+}
+
+.node:hover text {
+  display: inline-block;
+}
+
+    
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
+<body>
+    <script>
+    var course=localStorage.getItem("course");
+    </script>
+<div class="tab">
+    
+    if (course == 'course1'){
+        <button class="tablinks" onclick="opengraph(event, 'week1')">Week1</button>
+        <button class="tablinks" onclick="opengraph(event, 'week2')">Week2</button>
+        <button class="tablinks" onclick="opengraph(event, 'week3')">Week3</button>
+        <button class="tablinks" onclick="opengraph(event, 'week4')">Week4</button>
+        <button class="tablinks" onclick="opengraph(event, 'week5')">Week5</button>
+        <button class="tablinks" onclick="opengraph(event, 'week6')">Week6</button>
+        <button class="tablinks" onclick="opengraph(event, 'week7')">Week7</button>
+        <button class="tablinks" onclick="opengraph(event, 'week8')">Week8</button>
+        <button class="tablinks" onclick="opengraph(event, 'week9')">Week9</button>
+        <button class="tablinks" onclick="opengraph(event, 'week10')">Week10</button>
+        <button class="tablinks" onclick="opengraph(event, 'week11')">Week11</button>
+        <button class="tablinks" onclick="opengraph(event, 'week13')">Week13</button>
+        <button class="tablinks" onclick="opengraph(event, 'week14')">Week14</button>
+        <button class="tablinks" onclick="opengraph(event, 'nwgraph')">Full course</button>
+    }
+    else{
+        <button class="tablinks" onclick="opengraph(event, 'week1')">Week1</button>
+        <button class="tablinks" onclick="opengraph(event, 'week2')">Week2</button>
+        <button class="tablinks" onclick="opengraph(event, 'week3')">Week3</button>
+        <button class="tablinks" onclick="opengraph(event, 'week4')">Week4</button>
+        <button class="tablinks" onclick="opengraph(event, 'week5')">Week5</button>
+        <button class="tablinks" onclick="opengraph(event, 'week6')">Week6</button>
+    }
+</div>
+<script src="/d3/d3.v3.min.js"></script>
+
+
+    <div id="graph" class="tabcontent">
+<script>
+// http://blog.thomsonreuters.com/index.php/mobile-patent-suits-graphic-of-the-day/
+function opengraph(evt, week){
+var path=localStorage.getItem("path");
+var my_path=path+week+'.csv';
+d3.csv(my_path, function(error, links) {
+  if (error) throw error;
+var nodes = {};
+// Compute the distinct nodes from the links.
+links.forEach(function(link) {
+  link.source = nodes[link.source] || (nodes[link.source] = {name: link.source , type:link.type , c:link.comment , ct:link.commentthread , r:link.reply , group:link.group});
+  link.target = nodes[link.target] || (nodes[link.target] = {name: link.target , type:link.type , group:link.group});
+});
+var width = 1330,
+    height = 600;
+var force = d3.layout.force()
+    .nodes(d3.values(nodes))
+    .links(links)
+    .size([width, height])
+    .linkDistance(60)
+    .charge(-300)
+    .on("tick", tick)
+    .start();
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+var link = svg.selectAll(".link")
+    .data(force.links())
+  .enter().append("line")
+    .attr("class", function(d) { return "link " + d.type; })
+
+    
+  var node = svg.selectAll(".node")
+      .data(force.nodes())
+    .enter().append("g")
+      .attr("class", "node")
+     .on("mouseover", mouseover)
+    .on("mouseout", mouseout)
+    .call(force.drag);
+ 
+ //put in little circles to drag
+  node.append("circle")
+      .attr("r", 8)
+    .attr("class", function(d) { return "node " + d.group; })
+    
+  var label = node.append("text")
+      .attr("dy", "12px")
+      .text(function(d) { return "Author_id:"+d.name +" Comments="+d.c+" Commentthreads="+d.ct+" Replies="+d.r; });
+
+function tick() {
+  link
+      .attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+  node
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+    
+    
+   // label
+     //   .attr("x", function(d) { return d.x -600; })
+    //    .attr("y", function(d) { return d.y -300; });
+}
+function mouseover() {
+  d3.select(this).select("circle").transition()
+      .duration(750)
+      .attr("r", 16);
+}
+function mouseout() {
+  d3.select(this).select("circle").transition()
+      .duration(750)
+      .attr("r", 8);
+}
+});
+    
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById("graph").style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+    </div>

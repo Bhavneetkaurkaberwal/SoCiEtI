@@ -23,7 +23,7 @@
 		{
 			echo ("<SCRIPT LANGUAGE='JavaScript'>
         		   window.alert('User already exists. Please try again')
-        		   window.location.href='http://localhost/project/production/new_user.html'
+        		   window.location.href='http://localhost/project/prod/new_user.html'
         		   </SCRIPT>");
 		}
 	}
@@ -36,7 +36,7 @@
   	}
 	
 
-	 include("/opt/lampp/htdocs/project/production/session.php");
+	 include("/opt/lampp/htdocs/project/prod/session.php");
 	
 	$sql5 = "SELECT role FROM users Where users.user_id = '$user_id'";
       	$query = mysqli_query($conn,$sql5);
@@ -52,7 +52,7 @@
 	
 	echo ("<SCRIPT LANGUAGE='JavaScript'>
         window.alert('Added Succesfully')
-        window.location.href='http://localhost/project/production/new_user.html'
+        window.location.href='http://localhost/project/prod/new_user.html'
         </SCRIPT>");
 
 	
